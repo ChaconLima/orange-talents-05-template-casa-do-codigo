@@ -1,5 +1,6 @@
 package br.com.zupacademy.mateuschacon.casadocodigo.RecursoCadastroAutor.Models;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import javax.persistence.Entity;
@@ -22,6 +23,7 @@ public class Autor {
     private String email;
     @NotBlank @Size(max = 400)
     private String descricao;
+    private LocalDateTime dataCriacao = LocalDateTime.now();
     
     public Autor
     (

@@ -18,7 +18,7 @@ import br.com.zupacademy.mateuschacon.casadocodigo.RecursoCadastroAutor.Models.A
 import br.com.zupacademy.mateuschacon.casadocodigo.RecursoCadastroAutor.Repositorys.AutorRepository;
 
 @RestController
-@RequestMapping(value = "/autores")
+@RequestMapping(value = "/api/autores")
 public class AutoresController {
     
 
