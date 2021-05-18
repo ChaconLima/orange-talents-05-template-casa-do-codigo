@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import br.com.zupacademy.mateuschacon.casadocodigo.RecursoCadastroCategoria.Errors.ErrorNomaDuplicadoCategoria;
+
 @RestControllerAdvice
 public class ErroDeValidacao {
 
@@ -23,10 +25,18 @@ public class ErroDeValidacao {
     private MessageSource messageSource;
     @Autowired
     private ErroEmailDuplicadoAutor erroEmailDuplicadoAutor;
+
+    @Autowired
+    private ErrorNomaDuplicadoCategoria errorNomaDuplicadoCategoria;
     
-    @InitBinder
-    public void init(WebDataBinder webDataBinder){
-        webDataBinder.addValidators( erroEmailDuplicadoAutor );
+    @InitBinder(value = "novoAutorRequest")
+    public void init_autor(WebDataBinder webDataBinder){
+        webDataBinder.addValidators( this.erroEmailDuplicadoAutor );
+    }
+
+    @InitBinder(value = "novaCategoriaRequest")
+    public void init_categoria(WebDataBinder webDataBinder){
+        webDataBinder.addValidators( this.errorNomaDuplicadoCategoria );
     }
 
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)

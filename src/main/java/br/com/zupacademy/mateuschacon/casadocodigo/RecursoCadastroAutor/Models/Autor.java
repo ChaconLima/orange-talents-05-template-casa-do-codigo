@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -23,6 +24,7 @@ public class Autor {
     private String email;
     @NotBlank @Size(max = 400)
     private String descricao;
+    @NotNull
     private LocalDateTime dataCriacao = LocalDateTime.now();
     
     public Autor
