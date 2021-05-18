@@ -30,4 +30,8 @@ public class NovoAutorRequest {
         Autor autor = new Autor(this.nome,this.email,this.descricao);
         return autor;
     }
+
+    public String getEmail(){
+        return this.email;
+    }
 }

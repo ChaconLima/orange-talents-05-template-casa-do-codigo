@@ -36,6 +36,9 @@ public class Autor {
         this.descricao = descricao;
     }
 
+    @Deprecated
+    public Autor(){}
+
     public UUID getId(){
         return this.id;
     } 
