@@ -1,11 +1,11 @@
-package br.com.zupacademy.mateuschacon.casadocodigo.RecursoCadastroAutor.Errors;
+package br.com.zupacademy.mateuschacon.casadocodigo.Configuracao.MensagensErrorsPadroes;
 
-public class ErroNovoAutorRequest {
+public class ErroRequest {
     
     private String erro;
     private String mensagem;
 
-    public ErroNovoAutorRequest(String erro, String mensagem) {
+    public ErroRequest(String erro, String mensagem) {
         this.erro = erro;
         this.mensagem = mensagem;
     }

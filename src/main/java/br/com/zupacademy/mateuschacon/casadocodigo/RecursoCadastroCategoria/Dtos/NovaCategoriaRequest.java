@@ -2,11 +2,12 @@ package br.com.zupacademy.mateuschacon.casadocodigo.RecursoCadastroCategoria.Dto
 
 import javax.validation.constraints.NotBlank;
 
+import br.com.zupacademy.mateuschacon.casadocodigo.Configuracao.ValidacaoCustomizada.UniqueValue;
 import br.com.zupacademy.mateuschacon.casadocodigo.RecursoCadastroCategoria.Models.Categoria;
 
 public class NovaCategoriaRequest {
 
-    @NotBlank
+    @NotBlank @UniqueValue(domainClass = Categoria.class, fieldName = "nome")
     private String nome;
 
     @Deprecated
