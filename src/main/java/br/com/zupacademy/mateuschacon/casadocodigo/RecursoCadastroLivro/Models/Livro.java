@@ -52,6 +52,9 @@ public class Livro {
     @ManyToOne
     private Categoria categoria;
 
+    @Deprecated
+    public Livro(){}
+
     public Livro(@NotBlank String titulo, @NotBlank @Size(max = 500) String resumo, String sumario,
             @NotNull BigDecimal preco, @NotNull Integer quantidadePaginas, @NotBlank String isbn,
             @Future LocalDate dataPublicacao, Autor autor, Categoria categoria) {
@@ -71,5 +74,10 @@ public class Livro {
         return "{livro: [ titulo:"+ this.titulo+" , Isbn:"+this.isbn+"] }";
     }
 
-
+    public Long getId() {
+        return id;
+    }
+    public String getTitulo() {
+        return titulo;
+    }
 }

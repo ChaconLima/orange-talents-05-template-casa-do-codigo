@@ -1,8 +1,11 @@
 package br.com.zupacademy.mateuschacon.casadocodigo.RecursoCadastroLivro.Controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.zupacademy.mateuschacon.casadocodigo.RecursoCadastroAutor.Repositorys.AutorRepository;
 import br.com.zupacademy.mateuschacon.casadocodigo.RecursoCadastroCategoria.Repository.CategoriaRepository;
+import br.com.zupacademy.mateuschacon.casadocodigo.RecursoCadastroLivro.Dtos.LivroResponse;
 import br.com.zupacademy.mateuschacon.casadocodigo.RecursoCadastroLivro.Dtos.NovoLivroRequest;
 import br.com.zupacademy.mateuschacon.casadocodigo.RecursoCadastroLivro.Models.Livro;
 import br.com.zupacademy.mateuschacon.casadocodigo.RecursoCadastroLivro.Repository.LivroRepository;
@@ -32,5 +36,13 @@ public class LivrosController {
         this.livroRepository.save(livro);
 
         return livro.toString();
+    }
+
+    @GetMapping
+    public List<LivroResponse> listarLivros(){
+
+        List<Livro> listaDeLivros = (List<Livro>) this.livroRepository.findAll();
+
+        return LivroResponse.converterParaListaDeLivrosResponse(listaDeLivros);
     }
 }
