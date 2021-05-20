@@ -1,6 +1,6 @@
 package br.com.zupacademy.mateuschacon.casadocodigo.RecursoCadastroCategoria.Models;
 
-import java.util.UUID;
+
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,8 +13,8 @@ public class Categoria {
     
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotBlank
     private String nome;

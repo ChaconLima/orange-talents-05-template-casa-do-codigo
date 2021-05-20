@@ -1,7 +1,6 @@
 package br.com.zupacademy.mateuschacon.casadocodigo.RecursoCadastroAutor.Models;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,8 +15,8 @@ import javax.validation.constraints.Size;
 public class Autor {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    private Long id;
     @NotBlank
     private String nome;
     @NotBlank @Email
@@ -41,9 +40,6 @@ public class Autor {
     @Deprecated
     public Autor(){}
 
-    public UUID getId(){
-        return this.id;
-    } 
    
     @Override
     public String toString() {
