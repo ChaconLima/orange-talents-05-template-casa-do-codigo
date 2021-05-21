@@ -80,4 +80,25 @@ public class Livro {
     public String getTitulo() {
         return titulo;
     }
+    public String getResumo() {
+        return resumo;
+    }
+    public String getSumario() {
+        return sumario;
+    }
+    public Autor getAutor() {
+        return autor;
+    }
+    public Integer getQuantidadePaginas() {
+        return quantidadePaginas;
+    }
+    public String getIsbn() {
+        return isbn;
+    }
+    public Categoria getCategoria() {
+        return categoria;
+    }
+    public BigDecimal getPreco() {
+        return preco;
+    }
 }

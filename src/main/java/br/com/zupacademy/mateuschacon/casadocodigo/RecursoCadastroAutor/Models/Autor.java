@@ -45,4 +45,12 @@ public class Autor {
     public String toString() {
         return "{nome: '"+this.nome+"' , email:'"+this.email+"' , descricao:'"+this.descricao+"'}";
     }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
 }
