@@ -49,8 +49,8 @@ public class Cliente {
     @NotBlank
     private String telefone;
 
-    @NotNull
-    private Long cep;
+    @NotBlank
+    private String cep;
 
 
     @Deprecated
@@ -58,7 +58,7 @@ public class Cliente {
 
     public Cliente(@NotBlank @Email String email, @NotBlank String nome, @NotBlank String sobrenome,
             @NotBlank String documento, @NotBlank String endereco, @NotBlank String complemento,
-            @NotBlank String cidade, @NotNull Pais pais, Estado estado, @NotBlank String telefone, @NotNull Long cep) {
+            @NotBlank String cidade, @NotNull Pais pais, Estado estado, @NotBlank String telefone, @NotBlank String cep) {
         this.email = email;
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -72,4 +72,13 @@ public class Cliente {
         this.cep = cep;
     }
 
+    @Override
+    public String toString() {
+        
+        return "Cliente: "+this.nome+" com documento: "+this.documento+" cadastrado com sucesso";
+    }
+
+    public Long getId() {
+        return id;
+    }
 }

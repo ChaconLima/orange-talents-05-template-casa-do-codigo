@@ -10,19 +10,19 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 @Documented
-@Constraint(validatedBy = {ExisteEntityValidator.class})
+@Constraint(validatedBy = {PaisPossueEstadosValidator.class})
 @Target({ TYPE })
 @Retention(RUNTIME)
-public @interface ExisteEstadoEmPais {
+public @interface PaisPossueEstados {
 
     Class<?> domainClass();
 
-    String fieldName();
-
-    String message() default "O identificador do País possui estados vinculados";
+    String message() default "O identificador do País possui Estados vinculados";
 
     Class<?>[] groups() default { };
 
     Class<? extends Payload >[] payload() default {};
+
+    String fieldName();
 
 }

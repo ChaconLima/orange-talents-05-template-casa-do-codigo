@@ -27,4 +27,7 @@ public class Pais {
     public String toString() {
         return "{ Pais: "+this.nome+" }";
     }
+    public Long getId() {
+        return id;
+    }
 }

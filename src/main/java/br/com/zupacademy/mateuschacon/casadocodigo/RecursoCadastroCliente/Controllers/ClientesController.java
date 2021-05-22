@@ -3,11 +3,13 @@ package br.com.zupacademy.mateuschacon.casadocodigo.RecursoCadastroCliente.Contr
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.zupacademy.mateuschacon.casadocodigo.RecursoCadastroCliente.Dtos.IdClienteResponse;
 import br.com.zupacademy.mateuschacon.casadocodigo.RecursoCadastroCliente.Dtos.NovoClienteRequest;
 import br.com.zupacademy.mateuschacon.casadocodigo.RecursoCadastroCliente.Models.Cliente;
 import br.com.zupacademy.mateuschacon.casadocodigo.RecursoCadastroCliente.Repositorys.ClienteRepository;
@@ -26,12 +28,14 @@ public class ClientesController {
     ClienteRepository clienteRepository;
 
     @PostMapping
-    public String cadastroCliente(@RequestBody @Valid NovoClienteRequest novoClienteRequest){
+    public ResponseEntity<?> cadastroCliente(@RequestBody @Valid NovoClienteRequest novoClienteRequest){
 
         Cliente cliente =  novoClienteRequest.toModel(estadoRepository, paisRepository);
         this.clienteRepository.save(cliente);
+
+        IdClienteResponse idClienteResponse = new IdClienteResponse(cliente.getId(), cliente.toString());
         
-        return "cadastro";
+        return ResponseEntity.ok(idClienteResponse);
     }
 
 }

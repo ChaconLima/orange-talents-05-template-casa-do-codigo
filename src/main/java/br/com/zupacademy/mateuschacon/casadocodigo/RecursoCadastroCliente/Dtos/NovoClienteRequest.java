@@ -5,8 +5,12 @@ import java.util.Optional;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
-import br.com.zupacademy.mateuschacon.casadocodigo.Configuracao.ValidacaoCustomizada.ExisteEstadoEmPais;
+import br.com.zupacademy.mateuschacon.casadocodigo.Configuracao.ValidacaoCustomizada.CpfOrCnpj;
+import br.com.zupacademy.mateuschacon.casadocodigo.Configuracao.ValidacaoCustomizada.EstadoPertencePais;
+import br.com.zupacademy.mateuschacon.casadocodigo.Configuracao.ValidacaoCustomizada.ExisteEntity;
+import br.com.zupacademy.mateuschacon.casadocodigo.Configuracao.ValidacaoCustomizada.PaisPossueEstados;
 import br.com.zupacademy.mateuschacon.casadocodigo.Configuracao.ValidacaoCustomizada.UniqueValue;
 import br.com.zupacademy.mateuschacon.casadocodigo.RecursoCadastroCliente.Models.Cliente;
 import br.com.zupacademy.mateuschacon.casadocodigo.RecursoCadastroEstado.Models.Estado;
@@ -14,9 +18,14 @@ import br.com.zupacademy.mateuschacon.casadocodigo.RecursoCadastroEstado.Reposit
 import br.com.zupacademy.mateuschacon.casadocodigo.RecursoCadastroPais.Models.Pais;
 import br.com.zupacademy.mateuschacon.casadocodigo.RecursoCadastroPais.Repository.PaisRepository;
 
-// @ExisteEstadoEmPais()
+@PaisPossueEstados(domainClass=Estado.class, fieldName="pais")
+@EstadoPertencePais(domainClass = Estado.class, fieldName = "id")
 public class NovoClienteRequest {
     
+    /*--------Declaração dos atributos -----------------
+    *
+    *
+    ---------------------------------------------------*/
     @NotBlank @Email @UniqueValue(domainClass = Cliente.class,fieldName = "email")
     private String email;
 
@@ -26,7 +35,7 @@ public class NovoClienteRequest {
     @NotBlank
     private String sobrenome;
 
-    @NotBlank
+    @NotBlank @CpfOrCnpj @UniqueValue(domainClass = Cliente.class,fieldName = "documento")
     private String documento;
 
     @NotBlank
@@ -38,21 +47,25 @@ public class NovoClienteRequest {
     @NotBlank
     private String cidade;
 
-    @NotNull
+    @NotNull @ExisteEntity(domainClass = Pais.class, fieldName = "id")
     private Long identificadorPais;
 
     private Long identificadorEstado = null;
 
-    @NotBlank
+    @NotBlank @Pattern(regexp="\\(?\\d{2,}\\)?[ -]?\\d{4,}[\\-\\s]?\\d{4}", message = "Formato Errado")
     private String telefone;
 
-    @NotNull
-    private Long cep;
+    @NotBlank @Pattern(regexp = "\\d\\d\\d\\d\\d-\\d\\d\\d", message = "Formato Errado")
+    private String cep;
 
+    /*--------------- Construtor ----------------------
+    *
+    *
+    ---------------------------------------------------*/
     public NovoClienteRequest(@NotBlank @Email String email, @NotBlank String nome, @NotBlank String sobrenome,
             @NotBlank String documento, @NotBlank String endereco, @NotBlank String complemento,
             @NotBlank String cidade, @NotNull Long identificadorPais, @NotNull Long identificadorEstado,
-            @NotBlank String telefone, @NotNull Long cep) {
+            @NotBlank String telefone, @NotBlank String cep) {
         this.email = email;
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -66,6 +79,22 @@ public class NovoClienteRequest {
         this.cep = cep;
     }
 
+    /*------------- Metodos Gets ----------------------
+    *
+    *
+    ---------------------------------------------------*/
+
+    public Long getIdentificadorPais() {
+        return identificadorPais;
+    }
+    public Long getIdentificadorEstado() {
+        return identificadorEstado;
+    }
+
+    /*----- Metodos de Criação da entidade -------------
+    *
+    *
+    ---------------------------------------------------*/
     public Cliente toModel(EstadoRepository estadoRepository, PaisRepository paisRepository) {
 
         if(this.identificadorEstado!=null){
@@ -97,8 +126,5 @@ public class NovoClienteRequest {
             this.cep
         );
     }
-
-
-
 
 }
