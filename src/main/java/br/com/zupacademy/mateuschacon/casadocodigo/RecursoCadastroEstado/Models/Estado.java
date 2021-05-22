@@ -24,6 +24,9 @@ public class Estado {
     @ManyToOne @NotNull
     private Pais pais;
 
+    @Deprecated
+    public Estado(){}
+
     public Estado(@NotBlank String nome, @NotNull Pais pais) {
         this.nome = nome;
         this.pais = pais;
@@ -33,5 +36,9 @@ public class Estado {
     public String toString() {
        
         return "{ Estado: "+this.nome+" }";
+    }
+
+    public Pais getPais() {
+        return pais;
     }
 }
